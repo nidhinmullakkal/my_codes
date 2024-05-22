@@ -2,11 +2,11 @@
 int main()
 {
 	int a;
-	int *ptr;
+	int *p;
 
 	scanf("%d", &a);
-	ptr = &a;
-	printf("%d", *ptr);
+	p = &a;
+	printf("%d", *p);
 	
 	return 0;
 }
