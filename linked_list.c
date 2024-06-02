@@ -80,25 +80,59 @@ void insert()
 		if(position == 0){
 			head = ptr;
 			ptr->next = p;
-		}else{
-			if(position-1 == count){
+		}else if(position <= count){
+			if(position == count){ 
 				while(p->next != NULL)
 					p = p->next;
 				p->next = ptr;
 				ptr->next = NULL;
-			}/*else{
-				i = 1;
-				while(i == position){
-					i++;
-					p = p -> next;
+			}else{
+				while(position != 1){
+					--position;
+					p = p->next;
 				}
-				q = p;
-				q -> next = ptr;
-				ptr->next = p;
-			}*/
+				q = p -> next;
+				p -> next = ptr;
+				ptr->next = q;
+			}
 		}
+		else 
+			printf("\nInvalid position");
 
 	}
+}
+
+void delete()
+{
+	int position;
+	struct node *ptr = head;
+	struct node *p, *q;
+	printf("\nEnter the poisition :");
+	scanf("%d", &position);
+	int count = total();
+	if(count)
+	{
+		if(position < 0)
+			printf("\nInvalid position");
+		else if(position <= count){
+			if (position == 0){
+				head = head -> next;
+				free(ptr);
+			}else{
+				while((position-1) != 0){
+					position--;
+					ptr = ptr->next;
+				}
+				p = ptr;
+				ptr = ptr->next;
+				q = ptr -> next;
+				p->next = q;
+				free(ptr);
+			}
+		
+		}
+	}else
+		printf("\nNothing to delete");
 }
 
 int main()
@@ -115,6 +149,9 @@ int main()
 				break;
 			case 3: insert();
 				break;
+			case 4: delete();
+				break;
+
 			case 5: exit(0);
 			        break;
 			default: printf("Invalid option");
